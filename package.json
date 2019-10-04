@@ -1,0 +1,30 @@
+{
+  "name": "avanza-scraper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karatekaneen/avanza-scraper.git"
+  },
+  "author": "Robin Bauhn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/karatekaneen/avanza-scraper/issues"
+  },
+  "homepage": "https://github.com/karatekaneen/avanza-scraper#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "jest": "^24.9.0",
+    "nodemon": "^1.19.3",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "puppeteer": "^1.20.0"
+  }
+}
