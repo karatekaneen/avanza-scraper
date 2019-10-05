@@ -31,12 +31,13 @@ It loads the page, selects what lists to take the stocks from and extracts the d
 
 ### Parameters
 
--   `listsToSave` **[Array][14]&lt;[String][15]>** The lists we want to save (optional, default `['Mid Cap Stockholm','Small Cap Stockholm']`)
--   `url` **[String][15]** Url to the page we want to scrape (optional, default `'https://www.avanza.se/aktier/lista.html'`)
--   `headless` **[Boolean][16]** Run the browser in headless mode or not (optional, default `true`)
--   `sleepTime` **[Number][17]** The time to sleep inbetween trying to load more data. Increase this if all data isn't being loaded before moving forward. (optional, default `1000`)
+-   `params` **[Object][14]** 
+    -   `params.listsToSave` **[Array][15]&lt;[String][16]>** The lists we want to save (optional, default `['Mid Cap Stockholm','Small Cap Stockholm']`)
+    -   `params.url` **[String][16]** Url to the page we want to scrape (optional, default `'https://www.avanza.se/aktier/lista.html'`)
+    -   `params.headless` **[Boolean][17]** Run the browser in headless mode or not (optional, default `true`)
+    -   `params.sleepTime` **[Number][18]** The time to sleep inbetween trying to load more data. Increase this if all data isn't being loaded before moving forward. (optional, default `1000`)
 
-Returns **[Array][14]&lt;[Object][18]>** Array with all the scraped data
+Returns **[Array][15]&lt;[Object][14]>** Array with all the scraped data
 
 ### createScraper
 
@@ -44,9 +45,9 @@ Factory function for the scraper.
 
 #### Parameters
 
--   `deps` **[Object][18]** 
+-   `deps` **[Object][14]** 
     -   `deps.puppeteer` **[Function][19]** The puppeteer library (optional, default `require('puppeteer')`)
-    -   `deps.siteActions` **[Object][18]** Collection of helper functions to extract data from the page (optional, default `require('./siteActions')`)
+    -   `deps.siteActions` **[Object][14]** Collection of helper functions to extract data from the page (optional, default `require('./siteActions')`)
     -   `deps.sleep` **[Function][19]** Sleep function (optional, default `require('./helpers').sleep`)
 
 ## openListMenu
@@ -62,7 +63,7 @@ Select what lists to scrape the data for and click the selector for that one.
 
 ### Parameters
 
--   `lists` **[Array][14]&lt;[String][15]>** The names of the lists we want to scrape. - **Case sensitive for now**
+-   `lists` **[Array][15]&lt;[String][16]>** The names of the lists we want to scrape. - **Case sensitive for now**
 
 Returns **void** 
 
@@ -78,7 +79,7 @@ Returns **void**
 
 Extracts the data from the table of stocks.
 
-Returns **[Array][14]&lt;[Object][18]>** all the stocks in the list
+Returns **[Array][15]&lt;[Object][14]>** all the stocks in the list
 
 ## sleep
 
@@ -86,7 +87,7 @@ Take a timeout to wait for content to load
 
 ### Parameters
 
--   `milliseconds` **[Number][17]** number of milliseconds to wait
+-   `milliseconds` **[Number][18]** number of milliseconds to wait
 
 Returns **[Promise][20]&lt;void>** 
 
@@ -116,15 +117,15 @@ Returns **[Promise][20]&lt;void>**
 
 [13]: #parameters-3
 
-[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
+[14]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[15]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array
 
-[16]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
+[16]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
 
-[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
 [19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
