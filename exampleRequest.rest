@@ -1,0 +1,24 @@
+
+POST https://www.avanza.se/ab/component/highstockchart/getchart/orderbook
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0
+Accept: */*
+Accept-Language: sv-SE,sv;q=0.8,en-US;q=0.5,en;q=0.3
+Content-Type: application/json
+Cache-Control: no-cache
+X-Requested-With: XMLHttpRequest
+Pragma: no-cache
+
+{
+	"orderbookId":26268,
+	"chartType":"CANDLESTICK",
+	"chartResolution":"DAY",
+	"navigator":false,
+	"percentage":false,
+	"volume":true,
+	"owners":true,
+	"start":"2019-09-05T22:00:00.000Z",
+	"end":"2019-10-03T20:59:00.000Z",
+	"ta":[],
+	"compareIds":[]
+}
+
