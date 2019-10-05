@@ -77,7 +77,7 @@ exports.extractTableData = async () => {
 			.href.replace('https://www.avanza.se/aktier/om-aktien.html/', '')
 			.split('/')
 
-		return { name: data.innerText, id, linkName, list: dataCells[index] }
+		return { name: data.innerText, id: parseInt(id), linkName, list: dataCells[index] }
 	})
 
 	return stocks

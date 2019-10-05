@@ -6,13 +6,13 @@
  * @param {Object} deps.siteActions Collection of helper functions to extract data from the page
  * @param {Function} deps.sleep Sleep function
  */
-exports.createScraper = ({
+exports.createScrapeStocks = ({
 	puppeteer = require('puppeteer'),
 	siteActions = require('./siteActions'),
 	sleep = require('./helpers').sleep
 }) => {
 	/**
-	 * This is the main scraper function.
+	 * This is the main scrapeStocks function.
 	 * It loads the page, selects what lists to take the stocks from and extracts the data from the table.
 	 * @param {Object} params
 	 * @param {Array<String>} params.listsToSave The lists we want to save
@@ -21,8 +21,8 @@ exports.createScraper = ({
 	 * @param {Number} params.sleepTime The time to sleep inbetween trying to load more data. Increase this if all data isn't being loaded before moving forward.
 	 * @returns {Array<Object>} Array with all the scraped data
 	 */
-	const scraper = async ({
-		listsToSave = ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
+	const scrapeStocks = async ({
+		listsToSave = [], // ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
 		url = 'https://www.avanza.se/aktier/lista.html',
 		headless = true,
 		sleepTime = 1000
@@ -62,5 +62,5 @@ exports.createScraper = ({
 		await browser.close()
 		return stocks
 	}
-	return scraper
+	return scrapeStocks
 }
