@@ -10,13 +10,19 @@
  *
  */
 const AvanzaScraper = {}
-const { createScraper } = require('./src/scraper')
+const secretData = require('./secrets.json')
+const { createScrapeStocks } = require('./src/scraping/stockScraper')
+const { createSaveStockList } = require('./src/data/dataSaver')
 
-const scraper = createScraper({})
+const saveStockList = createSaveStockList({ credentials: secretData })
 
-scraper({}).then(stocks => {
-	console.log('Scrape finished')
+const scrapeStocks = createScrapeStocks({})
 
+scrapeStocks({})
+	.then(stocks => {
+		console.log(`Scrape finished - Found ${stocks.length} stocks`)
+
+		/*
 	stocks.forEach(s =>
 		console.log(`Id: ${s.id}
 	Name: ${s.name}
@@ -25,4 +31,9 @@ scraper({}).then(stocks => {
 	
 	`)
 	)
-})
+	*/
+		return saveStockList(stocks)
+	})
+	.then(x => {
+		console.log('Processing complete')
+	})
