@@ -49,12 +49,6 @@ module.exports = {
 				ignoreReadBeforeAssign: false
 			}
 		],
-		'function-paren-newline': [
-			1,
-			{
-				minItems: 4
-			}
-		],
 		camelcase: [
 			2,
 			{
@@ -76,4 +70,4 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 2017
 	}
-}
+};
