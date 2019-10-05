@@ -34,8 +34,9 @@ It loads the page, selects what lists to take the stocks from and extracts the d
 -   `listsToSave` **[Array][14]&lt;[String][15]>** The lists we want to save (optional, default `['Mid Cap Stockholm','Small Cap Stockholm']`)
 -   `url` **[String][15]** Url to the page we want to scrape (optional, default `'https://www.avanza.se/aktier/lista.html'`)
 -   `headless` **[Boolean][16]** Run the browser in headless mode or not (optional, default `true`)
+-   `sleepTime` **[Number][17]** The time to sleep inbetween trying to load more data. Increase this if all data isn't being loaded before moving forward. (optional, default `1000`)
 
-Returns **[Array][14]&lt;[Object][17]>** Array with all the scraped data
+Returns **[Array][14]&lt;[Object][18]>** Array with all the scraped data
 
 ### createScraper
 
@@ -43,10 +44,10 @@ Factory function for the scraper.
 
 #### Parameters
 
--   `deps` **[Object][17]** 
-    -   `deps.puppeteer` **[Function][18]** The puppeteer library (optional, default `require('puppeteer')`)
-    -   `deps.siteActions` **[Object][17]** Collection of helper functions to extract data from the page (optional, default `require('./siteActions')`)
-    -   `deps.sleep` **[Function][18]** Sleep function (optional, default `require('./helpers').sleep`)
+-   `deps` **[Object][18]** 
+    -   `deps.puppeteer` **[Function][19]** The puppeteer library (optional, default `require('puppeteer')`)
+    -   `deps.siteActions` **[Object][18]** Collection of helper functions to extract data from the page (optional, default `require('./siteActions')`)
+    -   `deps.sleep` **[Function][19]** Sleep function (optional, default `require('./helpers').sleep`)
 
 ## openListMenu
 
@@ -77,7 +78,7 @@ Returns **void**
 
 Extracts the data from the table of stocks.
 
-Returns **[Array][14]&lt;[Object][17]>** all the stocks in the list
+Returns **[Array][14]&lt;[Object][18]>** all the stocks in the list
 
 ## sleep
 
@@ -85,7 +86,7 @@ Take a timeout to wait for content to load
 
 ### Parameters
 
--   `milliseconds` **[Number][19]** number of milliseconds to wait
+-   `milliseconds` **[Number][17]** number of milliseconds to wait
 
 Returns **[Promise][20]&lt;void>** 
 
@@ -121,10 +122,10 @@ Returns **[Promise][20]&lt;void>**
 
 [16]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean
 
-[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
+[17]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
 
-[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
+[18]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object
 
-[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number
+[19]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/function
 
 [20]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise
