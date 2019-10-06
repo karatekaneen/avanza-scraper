@@ -1,8 +1,28 @@
-exports.createPriceScraper = ({
+/**
+ * Factory function for `fetchPriceData`
+ * @param {Object} deps
+ * @param {Function} deps.fetch node-fetch library
+ * @param {Function} deps.parsePriceData
+ * @returns {Function} fetchPriceData
+ */
+exports.createFetchPriceData = ({
 	fetch = require('node-fetch'),
 	parsePriceData = require('../data/dataParser').createParsePriceData({})
 }) => {
-	const priceScraper = async ({ orderbookId, start, end }) => {
+	/**
+	 * Function to fetch price, volume and owner data from Avanza.
+	 *
+	 * @param {Object} params
+	 * @param {Number} params.orderbookId id of the stock to fetch
+	 * @param {Date} params.start First date to fetch - **this day will be included**
+	 * @param {Date} params.end Last date to fetch **this day will be included**
+	 * @returns {Array<Object>} Price data for the given stock
+	 */
+	const fetchPriceData = async ({
+		orderbookId,
+		start = new Date('2019-01-01T22:00:00.000Z'),
+		end = new Date()
+	}) => {
 		const requestBody = {
 			orderbookId,
 			chartType: 'CANDLESTICK',
@@ -11,8 +31,8 @@ exports.createPriceScraper = ({
 			percentage: false,
 			volume: true,
 			owners: true,
-			start,
-			end,
+			start: start.toISOString(),
+			end: end.toISOString(),
 			ta: [],
 			compareIds: []
 		}
@@ -35,10 +55,72 @@ exports.createPriceScraper = ({
 				method: 'POST'
 			}
 		)
-		const priceData = parsePriceData(await resp.json())
+		const json = await resp.json()
+		const priceData = parsePriceData(json)
 
-		console.log(priceData)
 		return priceData
+	}
+	return fetchPriceData
+}
+
+/**
+ * Factory function for `priceScraper`
+ * @param {Object} deps
+ * @param {Function} deps.fetchPriceData Function to download data
+ * @param {Function} deps.savePricesToStock Database handler
+ * @param {Function} deps.createQueue Limiting the amount of open requests
+ * @returns {Function} priceScraper
+ */
+exports.createPriceScraper = ({
+	fetchPriceData = this.createFetchPriceData({}),
+	savePricesToStock = require('../data/dataSaver').createSavePricesToStock({}),
+	createQueue = require('./helpers').createQueue
+}) => {
+	/**
+	 * This is the main function that handles the workflow of fetching the price data and
+	 * save it to the stock in the db.
+	 *
+	 * TODO Error handling
+	 *
+	 * @param {Object} params
+	 * @param {Array<Object>} params.stocks Array of stocks to fetch price data about
+	 * @param {Object} params.settings Settings about the data fetching
+	 * @param {Date} params.settings.start First date to include in the data
+	 * @param {Date} params.settings.end Last date to include in the data
+	 * @param {Object} params.settings.maxNumOfWorkers Max of simultaneous open requests
+	 * @returns {void}
+	 */
+	const priceScraper = async ({ stocks, settings }) => {
+		// Loop over the stocks to create the tasks
+		const queueArr = stocks.map(({ id, name }) => {
+			// The things needed for a valid request
+			const request = {
+				start: settings.start,
+				end: settings.end,
+				orderbookId: id
+			}
+			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
+			return async () => {
+				console.log(`Fetching price data for ${name}`)
+				const priceData = await fetchPriceData(request)
+
+				console.log(`Fetching price data for ${name} is complete`)
+				return savePricesToStock({ priceData, id, name })
+			}
+		})
+
+		// Work through the queue
+		const taskResults = await createQueue(queueArr, settings.maxNumOfWorkers)
+
+		// Find errors
+		const errors = taskResults.filter(task => task instanceof Error)
+		console.log(
+			`Processing complete - ${taskResults.length - errors.length} successful - ${
+				errors.length
+			} failures`
+		)
+
+		errors.forEach(err => console.log(err))
 	}
 	return priceScraper
 }

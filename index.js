@@ -10,38 +10,28 @@
  *
  */
 const AvanzaScraper = {}
-const secretData = require('./secrets.json')
 const { createScrapeStocks } = require('./src/scraping/stockScraper')
 const { createSaveStockList } = require('./src/data/dataSaver')
 const { createPriceScraper } = require('./src/scraping/priceScraper')
 
-const saveStockList = createSaveStockList({ credentials: secretData })
+const saveStockList = createSaveStockList({})
 
 const priceScraper = createPriceScraper({})
 
 const scrapeStocks = createScrapeStocks({})
 
-// scrapeStocks({})
-// 	.then(stocks => {
-// 		console.log(`Scrape finished - Found ${stocks.length} stocks`)
-
-// 		/*
-// 	stocks.forEach(s =>
-// 		console.log(`Id: ${s.id}
-// 	Name: ${s.name}
-// 	List: ${s.list}
-// 	linkName: ${s.linkName}
-
-// 	`)
-// 	)
-// 	*/
-// 		return saveStockList(stocks)
-// 	})
-// 	.then(x => {
-// 		console.log('Processing complete')
-// 	})
-priceScraper({
-	start: '2019-09-05T22:00:00.000Z',
-	end: '2019-10-03T20:59:00.000Z',
-	orderbookId: 26268
-})
+scrapeStocks({})
+	.then(stocks => {
+		console.log(`Scrape finished - Found ${stocks.length} stocks`)
+		return saveStockList(stocks)
+	})
+	.then(stocks => {
+		priceScraper({
+			stocks,
+			settings: {
+				maxNumOfWorkers: 4,
+				start: new Date('2009-10-15T23:59:59.000Z'),
+				end: new Date('2019-10-04T23:59:59.000Z')
+			}
+		})
+	})
