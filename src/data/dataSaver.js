@@ -68,11 +68,12 @@ exports.createSavePricesToStock = ({
 			const objToSave = {
 				priceData,
 				lastPricePoint: priceData[priceData.length - 1].date,
+				mostRecentData: priceData[priceData.length - 1],
 				updatedAt: new Date()
 			}
 
 			await docRef.update(objToSave)
-			console.log(`${name} price data saved to database`)
+			console.log(`${name} - Price data saved`)
 			return true
 		}
 	}

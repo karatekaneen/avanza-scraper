@@ -12,26 +12,32 @@
 const AvanzaScraper = {}
 const { createScrapeStocks } = require('./src/scraping/stockScraper')
 const { createSaveStockList } = require('./src/data/dataSaver')
-const { createPriceScraper } = require('./src/scraping/priceScraper')
+const { createPriceScraper, createUpdateStockPrices } = require('./src/scraping/priceScraper')
 
-const saveStockList = createSaveStockList({})
+const MODE = 'update'
 
-const priceScraper = createPriceScraper({})
+if (MODE === 'initiate') {
+	const saveStockList = createSaveStockList({})
+	const priceScraper = createPriceScraper({})
+	const scrapeStocks = createScrapeStocks({})
 
-const scrapeStocks = createScrapeStocks({})
-
-scrapeStocks({})
-	.then(stocks => {
-		console.log(`Scrape finished - Found ${stocks.length} stocks`)
-		return saveStockList(stocks)
-	})
-	.then(stocks => {
-		priceScraper({
-			stocks,
-			settings: {
-				maxNumOfWorkers: 1,
-				start: new Date('2009-10-15T23:59:59.000Z'),
-				end: new Date('2019-10-04T23:59:59.000Z')
-			}
+	scrapeStocks({})
+		.then(stocks => {
+			console.log(`Scrape finished - Found ${stocks.length} stocks`)
+			return saveStockList(stocks)
 		})
-	})
+		.then(stocks => {
+			priceScraper({
+				stocks,
+				settings: {
+					maxNumOfWorkers: 1,
+					start: new Date('2019-09-15T23:59:59.000Z'),
+					end: new Date('2019-09-30T23:59:59.000Z')
+				}
+			})
+		})
+		.catch(err => console.log(err))
+} else if (MODE === 'update') {
+	const updateStockPrices = createUpdateStockPrices({})
+	updateStockPrices({ settings: { maxNumOfWorkers: 2 } })
+}

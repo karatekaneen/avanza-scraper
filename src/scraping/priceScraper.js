@@ -23,6 +23,13 @@ exports.createFetchPriceData = ({
 		start = new Date('2019-01-01T22:00:00.000Z'),
 		end = new Date()
 	}) => {
+		let startNew = null
+		try {
+			startNew = start.toISOString()
+		} catch (err) {
+			console.log(err)
+			console.log(start)
+		}
 		const requestBody = {
 			orderbookId,
 			chartType: 'CANDLESTICK',
@@ -92,19 +99,22 @@ exports.createPriceScraper = ({
 	 */
 	const priceScraper = async ({ stocks, settings }) => {
 		// Loop over the stocks to create the tasks
-		const queueArr = stocks.map(({ id, name }) => {
+		const queueArr = stocks.map(({ id, name, lastPricePoint }) => {
+			let start = settings.start
+
+			if (lastPricePoint) start = new Date(lastPricePoint)
 			// The things needed for a valid request
 			const request = {
-				start: settings.start,
+				start,
 				end: settings.end,
 				orderbookId: id
 			}
 			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
 			return async () => {
-				console.log(`Fetching price data for ${name}`)
+				console.log(`${name} - Downloading data`)
 				const priceData = await fetchPriceData(request)
 
-				console.log(`Fetching price data for ${name} is complete`)
+				console.log(`${name} - Download complete`)
 				return savePricesToStock({ priceData, id, name })
 			}
 		})
@@ -123,4 +133,62 @@ exports.createPriceScraper = ({
 		errors.forEach(err => console.log(err))
 	}
 	return priceScraper
+}
+
+exports.createUpdateStockPrices = ({
+	fetchPriceData = this.createFetchPriceData({}),
+	getAllStocks = require('../data/dataFetcher').createGetAllStocks({}),
+	savePricesToStock = require('../data/dataSaver').createSavePricesToStock({}),
+	createQueue = require('./helpers').createQueue
+}) => {
+	const updateStockPrices = async ({ settings }) => {
+		const stocks = []
+
+		console.log('Fetches all stocks')
+		const docRefs = await getAllStocks()
+		docRefs.forEach(doc => stocks.push(doc.data()))
+		console.log('All stocks fetched')
+
+		const queueArr = stocks.map(({ id, name, lastPricePoint, priceData }) => {
+			const start = new Date(lastPricePoint)
+
+			// The things needed for a valid request
+			const request = {
+				start,
+				end: settings.end,
+				orderbookId: id
+			}
+
+			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
+			const output = async () => {
+				console.log(`${name} - Downloading data`)
+				const newPriceData = (await fetchPriceData(request)).filter(
+					x => x.date > lastPricePoint
+				)
+				console.log(`${name} - Download complete`)
+
+				if (newPriceData.length > 0) {
+					console.log(`${name} - Found ${newPriceData.length} new datapoints`)
+					return savePricesToStock({ priceData: [...priceData, ...newPriceData], id, name })
+				} else {
+					console.log(`${name} - Found no new data`)
+					return Promise.resolve(true)
+				}
+			}
+			return output
+		})
+
+		// Work through the queue
+		const taskResults = await createQueue(queueArr, settings.maxNumOfWorkers)
+		// Find errors
+		const errors = taskResults.filter(task => task instanceof Error)
+		console.log(
+			`Processing complete - ${taskResults.length - errors.length} successful - ${
+				errors.length
+			} failures`
+		)
+
+		errors.forEach(err => console.log(err))
+	}
+	return updateStockPrices
 }
