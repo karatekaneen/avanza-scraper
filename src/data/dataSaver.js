@@ -18,31 +18,14 @@ exports.createSaveStockList = ({
 	 * @returns {Array<Object>} The original array of stocks
 	 */
 	const saveStockList = async stocks => {
-		const batchArr = [db.batch()]
-		let batchIndex = 0
-		let opNumber = 0
-
 		const dbCollection = await db.collection('stocks')
 
 		console.log('Starting to write to database')
-		stocks.forEach(stock => {
-			// Batches are limited to 500 ops so
-			if (opNumber === 498) {
-				batchArr.push(db.batch())
-				batchIndex++
-				opNumber = 0
-			}
-
-			// Add the doc to the batch
-			const docRef = dbCollection.doc(stock.id.toString())
-			batchArr[batchIndex].set(docRef, stock)
-
-			// Add op
-			opNumber++
+		const promiseArr = stocks.map(stock => {
+			return dbCollection.doc(stock.id.toString()).set(stock)
 		})
 
 		// Commit all the batches
-		const promiseArr = batchArr.map(batch => batch.commit())
 		await Promise.all(promiseArr)
 		console.log('Stocks saved to database')
 		return stocks
@@ -90,7 +73,7 @@ exports.createSavePricesToStock = ({
 
 			await docRef.update(objToSave)
 			console.log(`${name} price data saved to database`)
-			return docRef
+			return true
 		}
 	}
 	return savePricesToStock
