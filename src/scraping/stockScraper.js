@@ -22,7 +22,7 @@ exports.createScrapeStocks = ({
 	 * @returns {Array<Object>} Array with all the scraped data
 	 */
 	const scrapeStocks = async ({
-		listsToSave = [], // ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
+		listsToSave = ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
 		url = 'https://www.avanza.se/aktier/lista.html',
 		headless = true,
 		sleepTime = 1000

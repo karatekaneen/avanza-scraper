@@ -29,7 +29,7 @@ scrapeStocks({})
 		priceScraper({
 			stocks,
 			settings: {
-				maxNumOfWorkers: 4,
+				maxNumOfWorkers: 1,
 				start: new Date('2009-10-15T23:59:59.000Z'),
 				end: new Date('2019-10-04T23:59:59.000Z')
 			}
