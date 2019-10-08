@@ -56,7 +56,11 @@ exports.createQueue = (tasks, maxNumOfWorkers = 4) => {
 			getNextTask()
 		}
 		const getNextTask = () => {
-			console.log(`${numOfWorkers} workers active - ${tasks.length - taskIndex} jobs left`)
+			console.log(
+				`${numOfWorkers} workers active - ${((taskIndex / tasks.length) * 100).toFixed(
+					1
+				)}% complete`
+			)
 			if (numOfWorkers < maxNumOfWorkers && taskIndex < tasks.length) {
 				tasks[taskIndex]()
 					.then(handleResult(taskIndex))
