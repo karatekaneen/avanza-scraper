@@ -20,16 +20,10 @@ exports.createFetchPriceData = ({
 	 */
 	const fetchPriceData = async ({
 		orderbookId,
+		timePeriod,
 		start = new Date('2019-01-01T22:00:00.000Z'),
 		end = new Date()
 	}) => {
-		let startNew = null
-		try {
-			startNew = start.toISOString()
-		} catch (err) {
-			console.log(err)
-			console.log(start)
-		}
 		const requestBody = {
 			orderbookId,
 			chartType: 'CANDLESTICK',
@@ -38,10 +32,20 @@ exports.createFetchPriceData = ({
 			percentage: false,
 			volume: true,
 			owners: true,
-			start: start.toISOString(),
-			end: end.toISOString(),
 			ta: [],
 			compareIds: []
+		}
+
+		if (timePeriod) requestBody.timePeriod = timePeriod
+		else {
+			try {
+				requestBody.start = start.toISOString()
+				requestBody.end = end.toISOString()
+			} catch (err) {
+				console.log(err)
+				requestBody.start = new Date('2019-01-01T22:00:00.000Z').toISOString()
+				requestBody.end = new Date().toISOString()
+			}
 		}
 
 		const resp = await fetch(
@@ -154,24 +158,29 @@ exports.createUpdateStockPrices = ({
 
 			// The things needed for a valid request
 			const request = {
-				start,
-				end: settings.end,
+				timePeriod: 'month',
 				orderbookId: id
 			}
 
 			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
 			const output = async () => {
-				console.log(`${name} - Downloading data`)
-				const newPriceData = (await fetchPriceData(request)).filter(
-					x => x.date > lastPricePoint
-				)
-				console.log(`${name} - Download complete`)
+				// Fetch data and filter out the one that are older than last input
+				const newPriceData = (await fetchPriceData(request)).filter(x => {
+					return new Date(x.date) > start
+				})
 
 				if (newPriceData.length > 0) {
 					console.log(`${name} - Found ${newPriceData.length} new datapoints`)
-					return savePricesToStock({ priceData: [...priceData, ...newPriceData], id, name })
+
+					// Filter all data so we don't have any corrupt OHLCV data
+					const cleanedData = [...priceData, ...newPriceData].filter(
+						d => d.close && d.open && d.high && d.low && d.volume
+					)
+
+					// Save to DB
+					return savePricesToStock({ priceData: cleanedData, id, name })
 				} else {
-					console.log(`${name} - Found no new data`)
+					console.log(`${name} - Found no new data ${priceData.length}`)
 					return Promise.resolve(true)
 				}
 			}
