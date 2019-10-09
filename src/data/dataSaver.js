@@ -66,14 +66,19 @@ exports.createSavePricesToStock = ({
 			throw new Error(`Stock ${name} with id: ${id} does not exist in database`)
 		else {
 			const objToSave = {
-				priceData,
-				lastPricePoint: priceData[priceData.length - 1].date,
-				mostRecentData: priceData[priceData.length - 1],
 				updatedAt: new Date()
+			}
+			if (priceData.length > 0) {
+				objToSave.priceData = priceData
+				objToSave.lastPricePoint = priceData[priceData.length - 1].date
+				objToSave.mostRecentData = priceData[priceData.length - 1]
+			} else {
+				objToSave.priceData = []
+				objToSave.lastPricePoint = 0
 			}
 
 			await docRef.update(objToSave)
-			console.log(`${name} - Price data saved`)
+			console.log(`${name} - Found ${priceData.length} datapoints.`)
 			return true
 		}
 	}
