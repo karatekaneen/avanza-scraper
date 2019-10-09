@@ -1,2 +1,2 @@
-const d = new Date(1570140000000)
-console.log(d.toISOString())
+const d = new Date('2009-11-30')
+console.log(d.toISOString(), Date.now())

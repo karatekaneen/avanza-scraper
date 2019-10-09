@@ -31,8 +31,8 @@ if (MODE === 'initiate') {
 				stocks,
 				settings: {
 					maxNumOfWorkers: 1,
-					start: new Date('2019-09-15T23:59:59.000Z'),
-					end: new Date('2019-09-30T23:59:59.000Z')
+					start: new Date('2000-01-01T23:59:59.000Z'),
+					end: new Date('2009-11-30T23:59:59.000Z')
 				}
 			})
 		})
