@@ -115,8 +115,10 @@ exports.createPriceScraper = ({
 			}
 			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
 			return async () => {
-				console.log(`${name} - Downloading data`)
-				const priceData = await fetchPriceData(request)
+				const rawData = await fetchPriceData(request)
+
+				// Filter all data so we don't have any corrupt OHLCV data
+				const priceData = rawData.filter(d => d.close && d.open && d.high && d.low && d.volume)
 
 				console.log(`${name} - Download complete`)
 				return savePricesToStock({ priceData, id, name })
@@ -154,12 +156,35 @@ exports.createUpdateStockPrices = ({
 		console.log('All stocks fetched')
 
 		const queueArr = stocks.map(({ id, name, lastPricePoint, priceData }) => {
+			// The things needed for a valid request
+			const request = { orderbookId: id }
 			const start = new Date(lastPricePoint)
 
-			// The things needed for a valid request
-			const request = {
-				timePeriod: 'month',
-				orderbookId: id
+			/*
+			If it's less than one month since the lastPricePoint the Avanza API won't allow for fetching daily data.
+			So we calculate the days between the lastPricePoint and todays date.
+			We say it's more than a month if >= 30.
+			*/
+			// TODO Extract to own function
+			if (settings.start) {
+				request.start = settings.start
+				if (settings.end) {
+					request.end = settings.end
+				} else {
+					request.end = new Date()
+				}
+			} else if (lastPricePoint && !settings.start) {
+				const currentDate = new Date()
+				const dayDiff = (currentDate.getTime() - start.getTime()) / (1000 * 3600 * 24)
+
+				if (dayDiff >= 30) {
+					request.start = start
+					request.end = currentDate
+				} else {
+					request.timePeriod = 'month'
+				}
+			} else {
+				request.timePeriod = 'month'
 			}
 
 			// Return a function that returns a function call that is promise based. This is to be able to control the number of simultaneous open requests.
@@ -180,8 +205,16 @@ exports.createUpdateStockPrices = ({
 					// Save to DB
 					return savePricesToStock({ priceData: cleanedData, id, name })
 				} else {
-					console.log(`${name} - Found no new data ${priceData.length}`)
-					return Promise.resolve(true)
+					try {
+						// console.log(`${name} - Found no new data ${priceData.length}`)
+						return Promise.resolve(true)
+					} catch (error) {
+						if (!lastPricePoint || !priceData) {
+							return savePricesToStock({ priceData: [], id, name })
+						} else {
+							throw error
+						}
+					}
 				}
 			}
 			return output
