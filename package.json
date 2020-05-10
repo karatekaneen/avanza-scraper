@@ -4,8 +4,16 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "test",
-		"docs": "documentation build index.js -f md -o README.md"
+		"start": "node index.js",
+		"build": "npm run build-ts",
+		"debug": "ts-node src/index.ts --inspect=5858",
+		"build-ts": "tsc",
+		"postbuild": "cp package.json dist/package.json && cp package-lock.json dist/package-lock.json  &&  cd dist && npm ci --only=production",
+		"test": "jest --silent --verbose",
+		"testwatch": "jest --watchAll",
+		"testwatch:silent": "npm run testwatch -- --silent",
+		"dev": "nodemon --inspect=5858 -e ts --exec node -r ts-node/register ./src/index.ts",
+		"serve": "node dist/index.js"
 	},
 	"repository": {
 		"type": "git",
@@ -18,16 +26,23 @@
 	},
 	"homepage": "https://github.com/karatekaneen/avanza-scraper#readme",
 	"devDependencies": {
-		"babel-eslint": "^10.0.3",
-		"eslint": "^6.5.1",
-		"eslint-plugin-promise": "^4.2.1",
-		"jest": "^24.9.0",
-		"nodemon": "^1.19.3",
-		"prettier": "^1.18.2"
+		"@types/jest": "^25.2.1",
+		"@types/node": "^13.13.5",
+		"@types/puppeteer": "^2.0.1",
+		"@typescript-eslint/eslint-plugin": "^2.31.0",
+		"@typescript-eslint/parser": "^2.31.0",
+		"babel-eslint": "^10.1.0",
+		"eslint": "^6.8.0",
+		"jest": "^26.0.1",
+		"nodemon": "^2.0.3",
+		"prettier": "^2.0.5",
+		"ts-jest": "^25.5.1",
+		"ts-node": "^8.10.1",
+		"typescript": "^3.8.3"
 	},
 	"dependencies": {
 		"@google-cloud/firestore": "^2.4.0",
 		"node-fetch": "^2.6.0",
-		"puppeteer": "^1.20.0"
+		"puppeteer": "^3.0.4"
 	}
 }

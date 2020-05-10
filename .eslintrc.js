@@ -1,11 +1,13 @@
 module.exports = {
 	root: true,
-	env: {
-		es6: true,
-		node: true
-	},
-	plugins: ['promise'],
-	extends: ['eslint:recommended'],
+	parser: '@typescript-eslint/parser',
+	plugins: ['@typescript-eslint'],
+	extends: [
+		'eslint:recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
+		'plugin:@typescript-eslint/recommended',
+		'prettier/@typescript-eslint',
+	],
 	rules: {
 		'no-console': 'off',
 		'no-regex-spaces': 'off',
@@ -46,28 +48,38 @@ module.exports = {
 			'error',
 			{
 				destructuring: 'any',
-				ignoreReadBeforeAssign: false
-			}
+				ignoreReadBeforeAssign: false,
+			},
 		],
+
 		camelcase: [
 			2,
 			{
-				properties: 'always'
-			}
+				properties: 'always',
+			},
 		],
 		'space-before-function-paren': [
 			'error',
 			{
 				anonymous: 'never',
 				named: 'never',
-				asyncArrow: 'always'
-			}
+				asyncArrow: 'always',
+			},
 		],
 		indent: ['warn', 'tab'],
-		'no-tabs': 'off'
+		'no-tabs': 'off',
+		'@typescript-eslint/member-delimiter-style': [
+			'error',
+			{
+				multiline: {
+					delimiter: 'none',
+					requireLast: false,
+				},
+				singleline: {
+					delimiter: 'none',
+					requireLast: false,
+				},
+			},
+		],
 	},
-	parser: 'babel-eslint',
-	parserOptions: {
-		ecmaVersion: 2017
-	}
-};
+}
