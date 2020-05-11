@@ -1,13 +1,4 @@
 /**
- * Take a timeout to wait for content to load
- * @param {Number} milliseconds number of milliseconds to wait
- * @returns {Promise<void>}
- */
-exports.sleep = milliseconds => {
-	return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
-
-/**
  * Takes a two-dimensional array that looks like:
  * ```javascript
  * const dataArr = [
@@ -33,7 +24,7 @@ exports.sleep = milliseconds => {
  * @param {Array<Array>} dataArr 2D array
  * @returns {Object} Object with the date as key
  */
-exports.dateToKey = dataArray => {
+exports.dateToKey = (dataArray) => {
 	return dataArray.reduce((acc, [date, data]) => {
 		acc[date] = { date, data }
 		return acc
@@ -49,8 +40,8 @@ exports.createQueue = (tasks, maxNumOfWorkers = 4) => {
 	let numOfWorkers = 0
 	let taskIndex = 0
 
-	return new Promise(done => {
-		const handleResult = index => result => {
+	return new Promise((done) => {
+		const handleResult = (index) => (result) => {
 			tasks[index] = result
 			numOfWorkers--
 			getNextTask()
@@ -60,9 +51,7 @@ exports.createQueue = (tasks, maxNumOfWorkers = 4) => {
 				`${((taskIndex / tasks.length) * 100).toFixed(1)}% - ${numOfWorkers} workers active`
 			)
 			if (numOfWorkers < maxNumOfWorkers && taskIndex < tasks.length) {
-				tasks[taskIndex]()
-					.then(handleResult(taskIndex))
-					.catch(handleResult(taskIndex))
+				tasks[taskIndex]().then(handleResult(taskIndex)).catch(handleResult(taskIndex))
 				taskIndex++
 				numOfWorkers++
 				getNextTask()
