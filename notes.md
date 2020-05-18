@@ -30,3 +30,8 @@ await fetch("https://www.avanza.se/ab/component/orderbook_search/?query=stat+&co
 "method": "GET",
 "mode": "cors"
 });
+
+### Fetching
+
+-  In kommer ett gäng med ID:s, start- och slutdatum...
+-  för varje ID ska

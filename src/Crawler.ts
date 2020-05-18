@@ -1,22 +1,5 @@
 import * as Puppeteer from 'puppeteer'
-// import 'siteActions' from './siteActions'
-// import { sleep } from './helpers'
-type SiteSecurity = {
-	id: number
-	/**
-	 * The URL-safe name
-	 */
-	linkName: string
-	/**
-	 * The list that the security belongs to
-	 */
-	list?: string
-	/**
-	 * The correct name of the security
-	 */
-	name: string
-}
-
+import { SiteSecurity } from './interfaces'
 class Crawler {
 	#puppeteer: typeof Puppeteer
 
