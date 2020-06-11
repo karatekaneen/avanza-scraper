@@ -15,7 +15,6 @@ const x = async () => {
 	const test = await t.crawl({ getStocks: true, getIndices: true })
 	await db.saveSummaries({ securities: test.stocks, type: 'stock' })
 	await db.saveSummaries({ securities: test.indices, type: 'index' })
-	// TODO Save the crawl results to database
 
 	const indexResults = await df.scrapePrices({
 		securities: test.indices,

@@ -29,7 +29,7 @@ class DatabaseWrapper {
 	): Promise<FirebaseFirestore.WriteResult> {
 		let newDays: number
 
-		const doc = db.collection(this.getPriceCollectionName(type)).doc(id.toString())
+		const doc = db.collection('prices').doc(id.toString())
 		const docRef = await doc.get()
 
 		if (!docRef.exists) {
@@ -39,6 +39,7 @@ class DatabaseWrapper {
 		const objToSave = docRef.exists ? docRef.data() : {}
 
 		objToSave.updatedAt = new Date()
+		objToSave.type = type
 
 		if (replace) {
 			newDays = priceData.length
@@ -83,44 +84,35 @@ class DatabaseWrapper {
 		return { priceData: [...priceMap.values()], newDays }
 	}
 
-	private getPriceCollectionName(type: string): string {
-		if (type === 'index') {
-			return 'index-prices'
-		} else if (type === 'stock') {
-			return 'stock-prices'
-		} else {
-			throw new Error('unknown type')
-		}
-	}
-
 	public async saveSummaries(
 		{ securities, type }: { securities: SiteSecurity[]; type: string },
 		{ db = this.#db } = {}
 	): Promise<FirebaseFirestore.WriteResult[]> {
-		const dbCollection = db.collection(this.getSummaryCollectionName(type))
+		const dbCollection = db.collection('securities')
 
 		const writeResults = Promise.all(
-			securities.map((sec) => dbCollection.doc(sec.id.toString()).set(sec))
+			securities.map((sec) => dbCollection.doc(sec.id.toString()).set({ ...sec, type }))
 		)
 
 		return writeResults
 	}
 
-	private getSummaryCollectionName(type: string): string {
-		if (type === 'index') {
-			return 'indices'
-		} else if (type === 'stock') {
-			return 'stocks'
-		} else {
-			throw new Error('unknown type')
-		}
-	}
-
 	public async wipeDatabase(): Promise<void> {
 		const resp = await this.#db.collection('index-prices').listDocuments()
 		const resp2 = await this.#db.collection('stocks').listDocuments()
+		const resp3 = await this.#db.collection('indices').listDocuments()
+		const resp4 = await this.#db.collection('stock-prices').listDocuments()
+		const resp5 = await this.#db.collection('stock-helpers').listDocuments()
 		await Promise.all(resp.map((doc) => doc.delete()))
+		console.log(1)
 		await Promise.all(resp2.map((doc) => doc.delete()))
+		console.log(2)
+		await Promise.all(resp3.map((doc) => doc.delete()))
+		console.log(3)
+		await Promise.all(resp4.map((doc) => doc.delete()))
+		console.log(4)
+		await Promise.all(resp5.map((doc) => doc.delete()))
+		console.log(5)
 		console.log('deleted')
 	}
 }

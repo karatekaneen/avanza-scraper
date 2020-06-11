@@ -131,7 +131,7 @@ class Crawler {
 	private openListMenu(): void {
 		// Open the menu to choose lists
 		const listMenu = document.querySelector(
-			'#main > div > div > div.lgOffsetRight-0.smOffsetLeft-0.mdOffsetTop-0.xsOffsetLeft-0.mdOffsetRight-0.section.smOffsetBottom-12.lgOffsetLeft-0.xsOffsetRight-0.smOffsetRight-0.lg-12.sm-12.lgOffsetTop-0.smOffsetTop-0.md-12.lgOffsetBottom-12.mdOffsetBottom-12.xs-12.mdOffsetLeft-0.advanced-filter.xsOffsetTop-0.xsOffsetBottom-3 > div > div.category > div > div:nth-child(10) > div.widgetWrapper.u-clearFix > div > div:nth-child(2) > button'
+			'div.multiSelect:nth-child(2) > button:nth-child(1)'
 		) as HTMLElement
 
 		listMenu.click()
@@ -143,9 +143,7 @@ class Crawler {
 	 */
 	private selectActiveLists(lists: string[]): void {
 		// The <ul> of stock-lists
-		const listOfLists = document.querySelector(
-			'#main > div > div > div.lgOffsetRight-0.smOffsetLeft-0.mdOffsetTop-0.xsOffsetLeft-0.mdOffsetRight-0.section.smOffsetBottom-12.lgOffsetLeft-0.xsOffsetRight-0.smOffsetRight-0.lg-12.sm-12.lgOffsetTop-0.smOffsetTop-0.md-12.lgOffsetBottom-12.mdOffsetBottom-12.xs-12.mdOffsetLeft-0.advanced-filter.xsOffsetTop-0.xsOffsetBottom-3 > div > div.category > div > div.component.widget.category1.has-focus > div.widgetWrapper.u-clearFix > div > div:nth-child(2) > ul > li > ul'
-		) as HTMLElement
+		const listOfLists = document.querySelector('.landLabel > ul:nth-child(3)') as HTMLElement
 
 		// The individual items in the list:
 		;[...(listOfLists.children as any)].forEach((x) => {
