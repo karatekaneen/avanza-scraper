@@ -26,6 +26,8 @@ steps:
       - "europe-north1"
       - "--platform"
       - "managed"
+      - "--memory"
+      - "1Gi"
       - "--service-account"
       - "avanza-scraper@makeup-bauhn-se.iam.gserviceaccount.com"
       - "--max-instances"
