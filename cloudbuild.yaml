@@ -1,0 +1,32 @@
+steps:
+  # build the container image
+  # - name: "gcr.io/cloud-builders/npm"
+  #   id: Install Dependencies
+  #   args: ["ci"]
+  # - name: "gcr.io/cloud-builders/npm"
+  #   id: Compile Typescript
+  #   args: ["run", "build"]
+  - name: "gcr.io/cloud-builders/docker"
+    id: Build Docker image
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA", "."]
+  # push the container image to Container Registry
+  - name: "gcr.io/cloud-builders/docker"
+    id: Push Docker image
+    args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"]
+  # Deploy container image to Cloud Run
+  - name: "gcr.io/cloud-builders/gcloud"
+    id: Deploy to Cloud Run
+    args:
+      - "run"
+      - "deploy"
+      - "$REPO_NAME-$BRANCH_NAME"
+      - "--image"
+      - "gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA"
+      - "--region"
+      - "europe-north1"
+      - "--platform"
+      - "managed"
+      - "--service-account"
+      - "avanza-scraper@makeup-bauhn-se.iam.gserviceaccount.com"
+      - "--max-instances"
+      - "1"

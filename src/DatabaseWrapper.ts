@@ -5,10 +5,7 @@ class DatabaseWrapper {
 	#db: Firestore
 
 	constructor({ _Firestore = Firestore } = {}) {
-		this.#db = new _Firestore({
-			projectId: process.env.PROJECT_ID,
-			keyFilename: process.env.CREDENTIALS_PATH,
-		})
+		this.#db = new _Firestore()
 	}
 
 	public async updatePricedata(
