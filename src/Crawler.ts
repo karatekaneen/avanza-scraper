@@ -22,7 +22,10 @@ class Crawler {
 		puppeteer = this.#puppeteer,
 	} = {}): Promise<{ stocks?: SiteSecurity[]; indices?: SiteSecurity[] }> {
 		// Start the browser
-		const browser = await puppeteer.launch({ headless })
+		const browser = await puppeteer.launch({
+			headless,
+			args: ['--no-sandbox', '--disable-setuid-sandbox'],
+		})
 
 		const stocksPromise = getStocks ? this.crawlForStocks(browser) : null
 		const indicesPromise = getIndices ? this.crawlForIndices(browser) : null
