@@ -52,7 +52,7 @@ class Crawler {
 		{
 			listsToSave = ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
 			url = 'https://www.avanza.se/aktier/lista.html',
-			sleepTime = 1000,
+			sleepTime = 2000,
 		} = {}
 	): Promise<SiteSecurity[]> {
 		const page = await browser.newPage()
@@ -69,11 +69,13 @@ class Crawler {
 
 		// Click the "Show more" button as long as it exists
 		let allStocksVisible = false
-		while (!allStocksVisible) {
+		let timesAdded = 0
+		while (!allStocksVisible && timesAdded < 10) {
 			// Click the button
 			allStocksVisible = await page.evaluate(this.showMoreStocks)
 			// Wait for the data to load. Didn't get `waitUntil: 'networkIdle0'` to work.
 			await this.sleep(sleepTime)
+			timesAdded++
 			console.log('Added more stocks - waiting')
 		}
 
