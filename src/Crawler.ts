@@ -52,7 +52,7 @@ class Crawler {
 		{
 			listsToSave = ['Alla Sverige'],
 			url = 'https://www.avanza.se/aktier/lista.html',
-			sleepTime = 2000,
+			sleepTime = 3000,
 		} = {}
 	): Promise<SiteSecurity[]> {
 		const page = await browser.newPage()
@@ -72,9 +72,10 @@ class Crawler {
 		// Click the "Show more" button as long as it exists
 		let allStocksVisible = false
 		let timesAdded = 0
-		while (!allStocksVisible && timesAdded < 10) {
+		while (!allStocksVisible && timesAdded < 100) {
 			// Click the button
 			allStocksVisible = await page.evaluate(this.showMoreStocks)
+
 			// Wait for the data to load. Didn't get `waitUntil: 'networkIdle0'` to work.
 			await this.sleep(sleepTime)
 			timesAdded++
@@ -177,9 +178,7 @@ class Crawler {
 	 * @returns {void}
 	 */
 	private showMoreStocks(): boolean {
-		const button = document.querySelector(
-			'#main > div > div > div.lgOffsetRight-0.smOffsetLeft-0.mdOffsetTop-0.xsOffsetLeft-0.mdOffsetRight-0.section.smOffsetBottom-12.lgOffsetLeft-0.xsOffsetRight-0.smOffsetRight-0.lg-12.sm-12.lgOffsetTop-0.smOffsetTop-0.md-12.lgOffsetBottom-12.mdOffsetBottom-12.xs-12.mdOffsetLeft-0.advanced-filter.xsOffsetTop-0.xsOffsetBottom-3 > div > div.orderbookListTable.component > div.u-tCenter > button'
-		) as any
+		const button = document.querySelector('.fetchMoreButton') as any
 
 		const display = button.currentStyle
 			? button.currentStyle.display
