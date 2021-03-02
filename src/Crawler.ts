@@ -50,7 +50,7 @@ class Crawler {
 	private async crawlForStocks(
 		browser: Puppeteer.Browser,
 		{
-			listsToSave = ['Mid Cap Stockholm', 'Small Cap Stockholm'], // Large cap is chosen by default on the page
+			listsToSave = ['Alla Sverige'],
 			url = 'https://www.avanza.se/aktier/lista.html',
 			sleepTime = 2000,
 		} = {}
@@ -58,6 +58,8 @@ class Crawler {
 		const page = await browser.newPage()
 		await page.goto(url)
 		console.log('Opening stock list page')
+
+		await page.evaluate(this.clickCookieConsent)
 
 		// Open the list menu:
 		await page.evaluate(this.openListMenu)
@@ -106,6 +108,7 @@ class Crawler {
 
 		// Open the list menu:
 		console.log('Extracting indices')
+		await page.evaluate(this.clickCookieConsent)
 		const indices = await page.evaluate(this.extractIndices)
 
 		return indices
@@ -140,6 +143,14 @@ class Crawler {
 		) as HTMLElement
 
 		listMenu.click()
+	}
+
+	private clickCookieConsent(): void {
+		const cookieBtn = document.querySelector('.cookie-consent-btn') as HTMLElement
+
+		if (cookieBtn) {
+			cookieBtn.click()
+		}
 	}
 
 	/**
