@@ -52,7 +52,7 @@ class Crawler {
 		{
 			listsToSave = ['Mid Cap Stockholm', 'Small Cap Stockholm', 'First North Stockholm'],
 			url = 'https://www.avanza.se/aktier/lista.html',
-			sleepTime = 4000,
+			sleepTime = 5000,
 		} = {}
 	): Promise<SiteSecurity[]> {
 		const page = await browser.newPage()
