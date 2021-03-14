@@ -5,6 +5,10 @@ export interface SiteSecurity {
 	 */
 	linkName: string
 	/**
+	 * country where the security is listed
+	 */
+	country: string
+	/**
 	 * The list that the security belongs to
 	 */
 	list?: string

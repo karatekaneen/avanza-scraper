@@ -3,9 +3,10 @@ import DataFetcher from './DataFetcher'
 import { ScrapeSettings } from './interfaces'
 import DatabaseWrapper from './DatabaseWrapper'
 import { config } from 'dotenv'
-import * as express from 'express'
+import express from 'express'
 import { Request, Response } from 'express'
-import * as bodyParser from 'body-parser'
+import bodyParser from 'body-parser'
+import { StockFetcher } from './StockFetcher'
 
 config()
 
@@ -25,13 +26,17 @@ app.post('/', async (req: Request, res: Response) => {
 	const t = new Crawler()
 	const df = new DataFetcher()
 	const db = new DatabaseWrapper()
+	const sf = new StockFetcher()
 
-	const test = await t.crawl({ getStocks: true, getIndices: true })
-	await db.saveSummaries({ securities: test.stocks, type: 'stock' })
-	await db.saveSummaries({ securities: test.indices, type: 'index' })
+	const [{ indices }, stocks] = await Promise.all([
+		t.crawl({ getStocks: false, getIndices: true }),
+		sf.fetchStocks(),
+	])
+	await db.saveSummaries({ securities: stocks, type: 'stock' })
+	await db.saveSummaries({ securities: indices, type: 'index' })
 
 	await df.scrapePrices({
-		securities: test.indices,
+		securities: indices,
 		settings: {
 			maxNumOfWorkers: 8,
 			end: new Date(),
@@ -42,7 +47,7 @@ app.post('/', async (req: Request, res: Response) => {
 	})
 
 	await df.scrapePrices({
-		securities: test.stocks,
+		securities: stocks,
 		settings: {
 			maxNumOfWorkers: 8,
 			end: new Date(),

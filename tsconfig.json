@@ -6,6 +6,7 @@
 		"preserveConstEnums": true,
 		"sourceMap": true,
 		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
 		"baseUrl": ".",
 		"skipLibCheck": true,
 		"target": "ESNext",
