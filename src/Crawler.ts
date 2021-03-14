@@ -1,4 +1,4 @@
-import * as Puppeteer from 'puppeteer'
+import Puppeteer from 'puppeteer'
 import { SiteSecurity } from './interfaces'
 class Crawler {
 	#puppeteer: typeof Puppeteer
