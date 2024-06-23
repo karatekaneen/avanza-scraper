@@ -110,25 +110,29 @@ class Crawler {
 		// Open the list menu:
 		console.log('Extracting indices')
 		await page.evaluate(this.clickCookieConsent)
+		await page.waitForSelector('[data-e2e="quote-list-heading-Världsindex"]')
 		const indices = await page.evaluate(this.extractIndices)
 
 		return indices
 	}
 
 	private extractIndices(): SiteSecurity[] {
-		const indexElements = [...(document.querySelector('.roundCorners4').children as any)].find(
-			(x) => x.label === 'Världsindex'
-		)
+		const indices = [
+			...(document.querySelectorAll('[data-e2e="quote-list-heading-Världsindex"]') as any),
+			...(document.querySelectorAll('[data-e2e="quote-list-heading-Nordiska index"]') as any),
+			...(document.querySelectorAll('[data-e2e="quote-list-heading-Europeiska index"]') as any),
+		]
+			.flatMap((item) => [...item.parentNode.getElementsByTagName('a')])
+			.flatMap((indexLink) => {
+				const href = indexLink.href.split('/')
+				return {
+					id: parseInt(href[href.length - 2]),
+					name: indexLink.innerText,
+					linkName: indexLink.innerText,
+					list: 'index',
+				}
+			}) as SiteSecurity[]
 
-		const indices = [...indexElements.children].map((index) => {
-			const name = (index.innerText as string).replace(/\n\t\s*/g, '')
-			return {
-				name,
-				id: parseInt(index.value),
-				linkName: name,
-				list: 'index',
-			} as SiteSecurity
-		})
 		return indices
 	}
 
