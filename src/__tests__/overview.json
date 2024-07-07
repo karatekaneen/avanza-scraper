@@ -1,0 +1,1040 @@
+[
+	{
+		"id": null,
+		"title": "Börsen idag",
+		"active": true,
+		"widgets": [
+			{
+				"type": "INDEX_GRAPH",
+				"configuration": {
+					"categories": [
+						{
+							"name": "Nordiska index",
+							"orderbooks": [
+								{
+									"orderbookId": "1002994",
+									"name": "OMX Stockholm 30 GI",
+									"shortName": "OMXS30GI",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "19002",
+									"name": "OMX Stockholm 30",
+									"shortName": "OMXS30",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18988",
+									"name": "OMX Stockholm PI",
+									"shortName": "OMXSPI",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "53295",
+									"name": "OMX Helsinki 25",
+									"shortName": "OMXH25",
+									"countryCode": "FI"
+								},
+								{
+									"orderbookId": "53291",
+									"name": "OMX Copenhagen 20",
+									"shortName": "OMXC20",
+									"countryCode": "DK"
+								},
+								{
+									"orderbookId": "53294",
+									"name": "OSEBX Oslo",
+									"shortName": "OSEBX",
+									"countryCode": "NO"
+								}
+							]
+						},
+						{
+							"name": "Världsindex",
+							"orderbooks": [
+								{
+									"orderbookId": "155458",
+									"name": "DJ USA",
+									"shortName": "DJ USA",
+									"countryCode": "US"
+								},
+								{
+									"orderbookId": "18985",
+									"name": "Dow Jones",
+									"shortName": "DJIA",
+									"countryCode": "US"
+								},
+								{
+									"orderbookId": "155541",
+									"name": "NASDAQ 100",
+									"shortName": "NDX",
+									"countryCode": "US"
+								},
+								{
+									"orderbookId": "134949",
+									"name": "DJ Canada",
+									"shortName": "DJ Kanada",
+									"countryCode": "CA"
+								},
+								{
+									"orderbookId": "18984",
+									"name": "Hang Seng",
+									"shortName": "Hang Seng",
+									"countryCode": "HK"
+								},
+								{
+									"orderbookId": "18997",
+									"name": "Nikkei",
+									"shortName": "Nikkei",
+									"countryCode": "JP"
+								}
+							]
+						},
+						{
+							"name": "Europeiska index",
+							"orderbooks": [
+								{
+									"orderbookId": "18981",
+									"name": "DAX",
+									"shortName": "DAX",
+									"countryCode": "DE"
+								},
+								{
+									"orderbookId": "155570",
+									"name": "DJ France",
+									"shortName": "FRDOW",
+									"countryCode": "FR"
+								},
+								{
+									"orderbookId": "155698",
+									"name": "DJ UK",
+									"shortName": "DJ UK",
+									"countryCode": "GB"
+								},
+								{
+									"orderbookId": "155281",
+									"name": "DJ Italy",
+									"shortName": "ITDOW",
+									"countryCode": "IT"
+								},
+								{
+									"orderbookId": "155605",
+									"name": "DJ Portugal",
+									"shortName": "PTDOW",
+									"countryCode": "PT"
+								}
+							]
+						},
+						{
+							"name": "Branschindex",
+							"orderbooks": [
+								{
+									"orderbookId": "334578",
+									"name": "Energi",
+									"shortName": "Energi",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334593",
+									"name": "Finans&Fastighet",
+									"shortName": "Fin&fast",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334580",
+									"name": "Fordon och reservdelar",
+									"shortName": "SX4010PI",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334584",
+									"name": "Hälsovård",
+									"shortName": "Hälsa",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334586",
+									"name": "Industrivaror",
+									"shortName": "Industri",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334591",
+									"name": "Kraftförsörjning",
+									"shortName": "Kraft",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334581",
+									"name": "Livsmedel",
+									"shortName": "SX4510PI",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334577",
+									"name": "Material",
+									"shortName": "Material",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334603",
+									"name": "Resor och Fritid",
+									"shortName": "SX4050PI",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334597",
+									"name": "Teknologi",
+									"shortName": "Teknik",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "334602",
+									"name": "Telekom",
+									"shortName": "Telekom",
+									"countryCode": "SE"
+								}
+							]
+						},
+						{
+							"name": "Räntor",
+							"orderbooks": [
+								{
+									"orderbookId": "18993",
+									"name": "3-mån ränta",
+									"shortName": "3-mån ränta",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18982",
+									"name": "6-mån ränta",
+									"shortName": "6-mån ränta",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "19001",
+									"name": "5-års ränta",
+									"shortName": "5-års ränta",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18995",
+									"name": "10-års ränta",
+									"shortName": "10-års ränta",
+									"countryCode": "SE"
+								}
+							]
+						},
+						{
+							"name": "Valutor",
+							"orderbooks": [
+								{
+									"orderbookId": "19000",
+									"name": "USD/SEK",
+									"shortName": "USD",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18998",
+									"name": "EUR/SEK",
+									"shortName": "EUR",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "53293",
+									"name": "NOK/SEK",
+									"shortName": "NOK",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "53292",
+									"name": "DKK/SEK",
+									"shortName": "DKK",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18987",
+									"name": "EUR/USD",
+									"shortName": "EURUSD",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "108703",
+									"name": "GBP/SEK",
+									"shortName": "GBP",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "108701",
+									"name": "CAD/SEK",
+									"shortName": "CAD",
+									"countryCode": "SE"
+								}
+							]
+						},
+						{
+							"name": "Råvaror",
+							"orderbooks": [
+								{
+									"orderbookId": "18986",
+									"name": "Guld",
+									"shortName": "Guld",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18991",
+									"name": "Silver",
+									"shortName": "Silver",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "155722",
+									"name": "Olja",
+									"shortName": "Olja",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18989",
+									"name": "Koppar",
+									"shortName": "Koppar",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "155517",
+									"name": "Platina",
+									"shortName": "Platina",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18996",
+									"name": "Nickel",
+									"shortName": "Nickel",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18990",
+									"name": "Aluminium",
+									"shortName": "Aluminium",
+									"countryCode": "SE"
+								},
+								{
+									"orderbookId": "18983",
+									"name": "Bly",
+									"shortName": "Bly",
+									"countryCode": "SE"
+								}
+							]
+						}
+					]
+				},
+				"data": null,
+				"settings": null,
+				"name": "Indexgraf"
+			},
+			{
+				"type": "NORDIC_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "1002994",
+							"name": "OMX Stockholm 30 GI",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 502.48,
+							"priceThreeMonthsAgo": 485.16,
+							"priceStartOfYear": 456.48,
+							"lastPrice": 499.48,
+							"updated": 1720193400000
+						},
+						{
+							"orderbookId": "19002",
+							"name": "OMX Stockholm 30",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2571.87,
+							"priceThreeMonthsAgo": 2504.8,
+							"priceStartOfYear": 2396.07,
+							"lastPrice": 2556.53,
+							"updated": 1720193400000
+						},
+						{
+							"orderbookId": "18988",
+							"name": "OMX Stockholm PI",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 981.26,
+							"priceThreeMonthsAgo": 955.12,
+							"priceStartOfYear": 902.88,
+							"lastPrice": 979.25,
+							"updated": 1720193414000
+						},
+						{
+							"orderbookId": "53295",
+							"name": "OMX Helsinki 25",
+							"countryCode": "FI",
+							"instrumentType": "INDEX",
+							"closingPrice": 4560.96,
+							"priceThreeMonthsAgo": 4456.77,
+							"priceStartOfYear": 4515.97,
+							"lastPrice": 4524.12,
+							"updated": 1720193399000
+						},
+						{
+							"orderbookId": "53291",
+							"name": "OMX Copenhagen 20",
+							"countryCode": "DK",
+							"instrumentType": "INDEX",
+							"closingPrice": 2837.72,
+							"priceThreeMonthsAgo": 2633.19,
+							"priceStartOfYear": 2283.53,
+							"lastPrice": 2844.66,
+							"updated": 1720191599000
+						},
+						{
+							"orderbookId": "53294",
+							"name": "OSEBX Oslo",
+							"countryCode": "NO",
+							"instrumentType": "INDEX",
+							"closingPrice": 1425.84,
+							"priceThreeMonthsAgo": 1351.5,
+							"priceStartOfYear": 1306.61,
+							"lastPrice": 1418.89,
+							"updated": 1720189770000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Nordiska index"
+			},
+			{
+				"type": "WORLD_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "155458",
+							"name": "DJ USA",
+							"countryCode": "US",
+							"instrumentType": "INDEX",
+							"closingPrice": 1342.28,
+							"priceThreeMonthsAgo": 1270.98,
+							"priceStartOfYear": 1167.73,
+							"lastPrice": 1348.67,
+							"updated": 1720209705168
+						},
+						{
+							"orderbookId": "18985",
+							"name": "Dow Jones",
+							"countryCode": "US",
+							"instrumentType": "INDEX",
+							"closingPrice": 39308,
+							"priceThreeMonthsAgo": 38904.27,
+							"priceStartOfYear": 37689.4,
+							"lastPrice": 39375.87,
+							"updated": 1720214046884
+						},
+						{
+							"orderbookId": "155541",
+							"name": "NASDAQ 100",
+							"countryCode": "US",
+							"instrumentType": "INDEX",
+							"closingPrice": 20186.63,
+							"priceThreeMonthsAgo": 18108.46,
+							"priceStartOfYear": 16825.93,
+							"lastPrice": 20391.97,
+							"updated": 1720215000000
+						},
+						{
+							"orderbookId": "134949",
+							"name": "DJ Canada",
+							"countryCode": "CA",
+							"instrumentType": "INDEX",
+							"closingPrice": 745.23,
+							"priceThreeMonthsAgo": 746.86,
+							"priceStartOfYear": 701.62,
+							"lastPrice": 739.11,
+							"updated": 1720210675117
+						},
+						{
+							"orderbookId": "18984",
+							"name": "Hang Seng",
+							"countryCode": "HK",
+							"instrumentType": "INDEX",
+							"closingPrice": 18028.28,
+							"priceThreeMonthsAgo": 16723.92,
+							"priceStartOfYear": 17047.39,
+							"lastPrice": 17799.61,
+							"updated": 1720166906000
+						},
+						{
+							"orderbookId": "18997",
+							"name": "Nikkei",
+							"countryCode": "JP",
+							"instrumentType": "INDEX",
+							"closingPrice": 40913.65,
+							"priceThreeMonthsAgo": 38992.08,
+							"priceStartOfYear": 33464.17,
+							"lastPrice": 40912.37,
+							"updated": 1720161003000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Världsindex"
+			},
+			{
+				"type": "EUROPE_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "18981",
+							"name": "DAX",
+							"countryCode": "DE",
+							"instrumentType": "INDEX",
+							"closingPrice": 18450.48,
+							"priceThreeMonthsAgo": 18163.94,
+							"priceStartOfYear": 16751.64,
+							"lastPrice": 18475.45,
+							"updated": 1720195200590
+						},
+						{
+							"orderbookId": "155570",
+							"name": "DJ France",
+							"countryCode": "FR",
+							"instrumentType": "INDEX",
+							"closingPrice": 526.5,
+							"priceThreeMonthsAgo": 548.79,
+							"priceStartOfYear": 514.59,
+							"lastPrice": 525.22,
+							"updated": 1720210401159
+						},
+						{
+							"orderbookId": "155698",
+							"name": "DJ UK",
+							"countryCode": "GB",
+							"instrumentType": "INDEX",
+							"closingPrice": 362.4,
+							"priceThreeMonthsAgo": 346.93,
+							"priceStartOfYear": 340.48,
+							"lastPrice": 361.15,
+							"updated": 1720215570731
+						},
+						{
+							"orderbookId": "155281",
+							"name": "DJ Italy",
+							"countryCode": "IT",
+							"instrumentType": "INDEX",
+							"closingPrice": 259.55,
+							"priceThreeMonthsAgo": 259.48,
+							"priceStartOfYear": 231.83,
+							"lastPrice": 258.7,
+							"updated": 1720215570757
+						},
+						{
+							"orderbookId": "155605",
+							"name": "DJ Portugal",
+							"countryCode": "PT",
+							"instrumentType": "INDEX",
+							"closingPrice": 152.14,
+							"priceThreeMonthsAgo": 137.03,
+							"priceStartOfYear": 159.64,
+							"lastPrice": 152.47,
+							"updated": 1720201912470
+						}
+					]
+				},
+				"settings": null,
+				"name": "Europeiska index"
+			},
+			{
+				"type": "COMMODITY_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "18986",
+							"name": "Guld",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2357.04,
+							"priceThreeMonthsAgo": 2328.39,
+							"priceStartOfYear": 2062.72,
+							"lastPrice": 2390.89,
+							"updated": 1720212864000
+						},
+						{
+							"orderbookId": "18991",
+							"name": "Silver",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 30.42,
+							"priceThreeMonthsAgo": 27.46,
+							"priceStartOfYear": 23.79,
+							"lastPrice": 31.21,
+							"updated": 1720212841000
+						},
+						{
+							"orderbookId": "155722",
+							"name": "Olja",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 87.29,
+							"priceThreeMonthsAgo": 90.55,
+							"priceStartOfYear": 77.04,
+							"lastPrice": 86.52,
+							"updated": 1720212801000
+						},
+						{
+							"orderbookId": "18989",
+							"name": "Koppar",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 9871,
+							"priceThreeMonthsAgo": 9320,
+							"priceStartOfYear": 8580,
+							"lastPrice": 9970,
+							"updated": 1720213200000
+						},
+						{
+							"orderbookId": "155517",
+							"name": "Platina",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 1002.35,
+							"priceThreeMonthsAgo": 932.16,
+							"priceStartOfYear": 992.1,
+							"lastPrice": 1028.54,
+							"updated": 1720212850000
+						},
+						{
+							"orderbookId": "18996",
+							"name": "Nickel",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 17225,
+							"priceThreeMonthsAgo": 17715,
+							"priceStartOfYear": 16570,
+							"lastPrice": 17425,
+							"updated": 1720213200000
+						},
+						{
+							"orderbookId": "18990",
+							"name": "Aluminium",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2541,
+							"priceThreeMonthsAgo": 2433,
+							"priceStartOfYear": 2382,
+							"lastPrice": 2545,
+							"updated": 1720213200000
+						},
+						{
+							"orderbookId": "18983",
+							"name": "Bly",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2216.5,
+							"priceThreeMonthsAgo": 2118,
+							"priceStartOfYear": 2068,
+							"lastPrice": 2238,
+							"updated": 1720213200000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Råvaror"
+			},
+			{
+				"type": "CURRENCY_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "19000",
+							"name": "USD/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 10.51,
+							"priceThreeMonthsAgo": 10.641,
+							"priceStartOfYear": 10.089,
+							"lastPrice": 10.48,
+							"updated": 1720213182042
+						},
+						{
+							"orderbookId": "18998",
+							"name": "EUR/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 11.36,
+							"priceThreeMonthsAgo": 11.532,
+							"priceStartOfYear": 11.1366,
+							"lastPrice": 11.36,
+							"updated": 1720213200000
+						},
+						{
+							"orderbookId": "53293",
+							"name": "NOK/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 0.9937,
+							"priceThreeMonthsAgo": 0.9922,
+							"priceStartOfYear": 0.9916,
+							"lastPrice": 0.9936,
+							"updated": 1720213413914
+						},
+						{
+							"orderbookId": "53292",
+							"name": "DKK/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 1.522,
+							"priceThreeMonthsAgo": 1.546,
+							"priceStartOfYear": 1.4938,
+							"lastPrice": 1.5223,
+							"updated": 1720213413914
+						},
+						{
+							"orderbookId": "18987",
+							"name": "EUR/USD",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 1.0813,
+							"priceThreeMonthsAgo": 1.0838,
+							"priceStartOfYear": 1.1038,
+							"lastPrice": 1.0839,
+							"updated": 1720213200303
+						},
+						{
+							"orderbookId": "108703",
+							"name": "GBP/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 13.4,
+							"priceThreeMonthsAgo": 13.4489,
+							"priceStartOfYear": 12.8443,
+							"lastPrice": 13.43,
+							"updated": 1720213353891
+						},
+						{
+							"orderbookId": "108701",
+							"name": "CAD/SEK",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 7.7167,
+							"priceThreeMonthsAgo": 7.8298,
+							"priceStartOfYear": 7.6158,
+							"lastPrice": 7.68,
+							"updated": 1720213353889
+						}
+					]
+				},
+				"settings": null,
+				"name": "Valutor"
+			},
+			{
+				"type": "INTEREST_INDICES",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "18993",
+							"name": "3-mån ränta",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 3.53,
+							"priceThreeMonthsAgo": 3.9,
+							"priceStartOfYear": 3.87,
+							"lastPrice": 3.53,
+							"updated": 1720162425000
+						},
+						{
+							"orderbookId": "18982",
+							"name": "6-mån ränta",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 3.39,
+							"priceThreeMonthsAgo": 3.73,
+							"priceStartOfYear": 3.86,
+							"lastPrice": 3.39,
+							"updated": 1720161572000
+						},
+						{
+							"orderbookId": "19001",
+							"name": "5-års ränta",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2.25,
+							"priceThreeMonthsAgo": 2.46,
+							"priceStartOfYear": 1.99,
+							"lastPrice": 2.23,
+							"updated": 1720188150000
+						},
+						{
+							"orderbookId": "18995",
+							"name": "10-års ränta",
+							"countryCode": "SE",
+							"instrumentType": "INDEX",
+							"closingPrice": 2.28,
+							"priceThreeMonthsAgo": 2.48,
+							"priceStartOfYear": 2.03,
+							"lastPrice": 2.25,
+							"updated": 1720188181000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Räntor"
+			},
+			{
+				"type": "NEWS",
+				"configuration": null,
+				"data": null,
+				"settings": null,
+				"name": "Nyheter"
+			},
+			{
+				"type": "GAINERS",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "741998",
+							"name": "Isofol Medical",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 0.688,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 0.939,
+							"updated": 1720193394000
+						},
+						{
+							"orderbookId": "852674",
+							"name": "Ovzon",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 19.28,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 23.9,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "5490",
+							"name": "Precise Biometrics",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 4.805,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 5.8,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "262018",
+							"name": "Moberg Pharma",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 28.8,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 33.88,
+							"updated": 1720193387000
+						},
+						{
+							"orderbookId": "569319",
+							"name": "Starbreeze A",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 0.312,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 0.35,
+							"updated": 1720193389000
+						},
+						{
+							"orderbookId": "5468",
+							"name": "Fingerprint Cards B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 0.077,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 0.0856,
+							"updated": 1720193397000
+						},
+						{
+							"orderbookId": "861575",
+							"name": "Projektengagemang Sweden B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 12.4,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 13.3,
+							"updated": 1720186724000
+						},
+						{
+							"orderbookId": "563251",
+							"name": "Oscar Properties Holding PREF",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 230,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 246,
+							"updated": 1720189582000
+						},
+						{
+							"orderbookId": "811105",
+							"name": "Enad Global 7",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 14.68,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 15.6,
+							"updated": 1720193386000
+						},
+						{
+							"orderbookId": "28567",
+							"name": "Orexo",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 19.6,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 20.8,
+							"updated": 1720193389000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Vinnare Stockholmsbörsen"
+			},
+			{
+				"type": "LOSERS",
+				"configuration": null,
+				"data": {
+					"orderbooks": [
+						{
+							"orderbookId": "460955",
+							"name": "Oscar Properties Holding",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 0.306,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 0.255,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "656979",
+							"name": "Oscar Properties Holding PREFB",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 1700,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 1500,
+							"updated": 1720187482000
+						},
+						{
+							"orderbookId": "5457",
+							"name": "Clas Ohlson B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 183.3,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 166.5,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "5480",
+							"name": "Anoto Group",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 0.1795,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 0.1665,
+							"updated": 1720193386000
+						},
+						{
+							"orderbookId": "790858",
+							"name": "Balco Group",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 44.2,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 42.5,
+							"updated": 1720193390000
+						},
+						{
+							"orderbookId": "5418",
+							"name": "Softronic B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 23.85,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 22.95,
+							"updated": 1720193397000
+						},
+						{
+							"orderbookId": "5395",
+							"name": "Pricer B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 13.4,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 12.9,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "1374804",
+							"name": "Momentum Group B",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 173.8,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 167.4,
+							"updated": 1720193375000
+						},
+						{
+							"orderbookId": "5505",
+							"name": "BioInvent International",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 33.65,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 32.5,
+							"updated": 1720193373000
+						},
+						{
+							"orderbookId": "666685",
+							"name": "TF Bank",
+							"countryCode": "SE",
+							"instrumentType": "STOCK",
+							"closingPrice": 246,
+							"priceThreeMonthsAgo": null,
+							"priceStartOfYear": null,
+							"lastPrice": 238,
+							"updated": 1720193380000
+						}
+					]
+				},
+				"settings": null,
+				"name": "Förlorare Stockholmsbörsen"
+			}
+		],
+		"generation": 2
+	}
+]

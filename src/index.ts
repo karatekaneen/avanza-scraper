@@ -1,4 +1,3 @@
-import Crawler from './Crawler'
 import DataFetcher from './DataFetcher'
 import { ScrapeSettings } from './interfaces'
 import DatabaseWrapper from './DatabaseWrapper'
@@ -7,6 +6,7 @@ import express from 'express'
 import { Request, Response } from 'express'
 import bodyParser from 'body-parser'
 import { StockFetcher } from './StockFetcher'
+import { IndexFetcher } from './IndexFetcher'
 
 config()
 
@@ -23,14 +23,14 @@ app.post('/', async (req: Request, res: Response) => {
 		res.status(400).send(`Bad Request: ${msg}`)
 		return
 	}
-	const t = new Crawler()
 	const df = new DataFetcher()
 	const db = new DatabaseWrapper()
-	const sf = new StockFetcher()
+	const stockFetcher = new StockFetcher()
+	const indexFetcher = new IndexFetcher()
 
-	const [{ indices }, stocks] = await Promise.all([
-		t.crawl({ getStocks: false, getIndices: true }),
-		sf.fetchStocks(),
+	const [indices, stocks] = await Promise.all([
+		indexFetcher.fetchIndices(),
+		stockFetcher.fetchStocks(),
 	])
 	await db.saveSummaries({ securities: stocks, type: 'stock' })
 	await db.saveSummaries({ securities: indices, type: 'index' })
