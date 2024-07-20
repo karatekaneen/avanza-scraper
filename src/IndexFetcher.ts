@@ -65,7 +65,7 @@ export class IndexFetcher {
 			method: 'GET',
 		})
 
-		return []
+		return this.extractIndices(resp.data)
 	}
 
 	public extractIndices(overview: Overview[]): SiteSecurity[] {
