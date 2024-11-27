@@ -25,6 +25,7 @@ describe('Stock Fetcher', () => {
 				expect(security.id).toBeGreaterThan(0)
 				expect(security.linkName).toBeTruthy()
 				expect(security.name.length).toBeGreaterThan(0)
+				expect(security.list).toBe('First North Stockholm')
 			}
 		})
 
