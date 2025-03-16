@@ -204,7 +204,7 @@ class DataFetcher {
 
 	private parsePriceData({ ohlc }: AvanzaOrderbookResponse): PriceData[] {
 		// Add the data to the object
-		const priceData: PriceData[] = ohlc.map((datapoint) => {
+		const priceData: PriceData[] = (ohlc || []).map((datapoint) => {
 			return {
 				date: new Date(datapoint.timestamp).toISOString(),
 				open: datapoint.open,
