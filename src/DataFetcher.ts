@@ -15,46 +15,30 @@ interface AvanzaPeriodSettings {
 	end?: string
 }
 
+type OHLCV = {
+	timestamp: number
+	open: number
+	close: number
+	low: number
+	high: number
+	totalVolumeTraded: number
+}
+
 interface AvanzaOrderbookResponse {
-	dataPoints: number[][]
-	volumePoints: Array<[number, number]>
-	ownersPoints: Array<[number, number]>
+	ohlc: OHLCV[]
 }
 
 interface AvanzaRequestBody {
 	orderbookId: number
+	chartResolution: 'day'
 	/**
-	 * What kind of chart? i.e. candlestick, line etc
+	 * Start date as an ISO date
 	 */
-	chartType: string
+	start: string
 	/**
-	 * What resolution of each datapoint
+	 * End date as an ISO date
 	 */
-	chartResolution: string
-	navigator: boolean
-	percentage: boolean
-	/**
-	 * Include volume data?
-	 */
-	volume: boolean
-	/**
-	 * Include owner data?
-	 */
-	owners: boolean
-	ta: any[]
-	compareIds: string[]
-	/**
-	 * Start date as an ISO-string
-	 */
-	start?: string
-	/**
-	 * End date as an ISO-string
-	 */
-	end?: string
-	/**
-	 * Shorthand to decide on how much data to get instead of using start/end. Usually "month" is used.
-	 */
-	timePeriod?: string
+	end: string
 }
 
 class DataFetcher {
@@ -138,14 +122,7 @@ class DataFetcher {
 	}): Promise<PriceData[]> {
 		const requestBody = {
 			orderbookId,
-			chartType: 'CANDLESTICK',
-			chartResolution: 'DAY',
-			navigator: false,
-			percentage: false,
-			volume: true,
-			owners: true,
-			ta: [],
-			compareIds: [],
+			chartResolution: 'day',
 		} as AvanzaRequestBody
 		const requests: Promise<PriceData[]>[] = []
 
@@ -153,7 +130,7 @@ class DataFetcher {
 		let tempStart = new Date(start)
 
 		while (tempEnd < end) {
-			tempEnd.setFullYear(tempEnd.getFullYear() + 9) // Fetching maximum of 9 years history in one request
+			tempEnd.setFullYear(tempEnd.getFullYear() + 4) // Fetching maximum of 4 years history in one request
 
 			let periodSettings: AvanzaPeriodSettings
 
@@ -184,31 +161,24 @@ class DataFetcher {
 	}
 
 	private getPeriodArguments({
-		timePeriod,
 		start = new Date('1999-01-01T22:00:00.000Z'),
 		end = new Date(),
 	}: PeriodSettings): AvanzaPeriodSettings {
 		const output = {} as AvanzaPeriodSettings
 
-		const dayDiff = (end.getTime() - start.getTime()) / (1000 * 3600 * 24)
-
-		if (timePeriod) {
-			output.timePeriod = timePeriod
-		} else if (dayDiff < 30) {
-			output.timePeriod = 'month'
-		} else {
-			output.start = start.toISOString()
-			output.end = end.toISOString()
-		}
+		output.start = start.toISOString().split('T')[0]
+		output.end = end.toISOString().split('T')[0]
 
 		return output
 	}
 
 	private async makeRequest(
 		requestBody: AvanzaRequestBody,
-		url = 'https://www.avanza.se/ab/component/highstockchart/getchart/orderbook',
-		method = 'POST'
+		baseURL = 'https://www.avanza.se/_api/price-chart/stock',
+		method = 'GET'
 	): Promise<PriceData[]> {
+		const url = `${baseURL}/${requestBody.orderbookId}?from=${requestBody.start}&to=${requestBody.end}&resolution=${requestBody.chartResolution}`
+
 		const resp = await this.#fetch(url, {
 			// credentials: 'include',
 			headers: {
@@ -218,10 +188,8 @@ class DataFetcher {
 				'Accept-Language': 'sv-SE,sv;q=0.8,en-US;q=0.5,en;q=0.3',
 				'Content-Type': 'application/json',
 				'Cache-Control': 'no-cache',
-				'X-Requested-With': 'XMLHttpRequest',
 				Pragma: 'no-cache',
 			},
-			body: JSON.stringify(requestBody),
 			method,
 		})
 
@@ -234,49 +202,18 @@ class DataFetcher {
 		return priceData
 	}
 
-	/**
-	 * This parses the data from the Avanza API to proper objects.
-	 * Output object looks like:
-	 *
-	 * ```javascript
-	 * const output = [
-	 * 	{
-	 * 		date: '1999-01-01T22:00:00.000Z'
-	 * 		open: 123,
-	 * 		high: 125,
-	 * 		low: 121,
-	 * 		close: 123,
-	 * 		volume: 374298, // # Stocks traded
-	 * 		owners: 4200 // # owners on Avanza
-	 * 	}
-	 * ]
-	 * ```
-	 *
-	 * @param json The price data from the API response
-	 * @param json.dataPoints The array of price data originally provided,
-	 * @param json.volumePoints Array of date and volume traded on that day
-	 * @param json.ownersPoints Array of date and number of owners on Avanza on that date
-	 * @returns The parsed price data.
-	 */
-	private parsePriceData({
-		dataPoints,
-		volumePoints,
-		ownersPoints,
-	}: AvanzaOrderbookResponse): PriceData[] {
-		const volumeData = new Map(volumePoints)
-		const ownersData = new Map(ownersPoints)
-
+	private parsePriceData({ ohlc }: AvanzaOrderbookResponse): PriceData[] {
 		// Add the data to the object
-		const priceData: PriceData[] = dataPoints.map(([date, open, high, low, close]) => {
+		const priceData: PriceData[] = ohlc.map((datapoint) => {
 			return {
-				date: new Date(date).toISOString(),
-				open,
-				high,
-				low,
-				close,
-				volume: volumeData.get(date) || null,
-				owners: ownersData.get(date) || null,
-			}
+				date: new Date(datapoint.timestamp).toISOString(),
+				open: datapoint.open,
+				high: datapoint.high,
+				low: datapoint.low,
+				close: datapoint.close,
+				volume: datapoint.totalVolumeTraded || null,
+				owners: null,
+			} as PriceData
 		})
 
 		return priceData
